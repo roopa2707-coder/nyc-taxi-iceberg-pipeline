@@ -35,7 +35,18 @@ st.header("1. Top 10 pickup zones by revenue")
 top = load("q1_top10_pickup_zones_by_revenue")
 if top is not None:
     top["zone"] = top["pickup_zone"] + " (" + top["pickup_borough"] + ")"
-    st.bar_chart(top.set_index("zone")["total_revenue"], horizontal=True)
+    import altair as alt
+
+    chart = (
+        alt.Chart(top)
+        .mark_bar()
+        .encode(
+            x=alt.X("total_revenue:Q", title="Total revenue (USD)"),
+            y=alt.Y("zone:N", sort="-x", title=None),  # highest revenue at the top
+            tooltip=["zone", "trips", "total_revenue", "revenue_per_trip"],
+        )
+    )
+    st.altair_chart(chart, use_container_width=True)
     st.dataframe(top.drop(columns="zone"), hide_index=True, use_container_width=True)
 
 st.header("2. Trip demand by hour of day")

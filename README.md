@@ -10,7 +10,20 @@ into Apache Iceberg tables registered in Apache Polaris, and queried from Snowfl
 | Clean   | Iceberg `taxi.trips_clean` (+ `taxi.trips_rejected`) | validated, enriched trips; rejected rows with a reason |
 | Metrics | Iceberg `taxi.daily_zone_metrics`                  | trips, revenue, avg tip %, avg minutes per day and zone |
 
-**Working URL:** `<add your Streamlit Community Cloud URL or video link here>`
+**Working URL:** https://nyc-taxi-iceberg-pipeline-84tzo4znqbbelocy4p89y4.streamlit.app (Streamlit app showing the Snowflake query results)
+
+**Results in this repo:** `results/q1_*.csv`, `q2_*.csv`, `q3_*.csv` (Snowflake query output), `results/screenshots/` (each pipeline step, the Snowflake queries), `results/dq_report.json`, `results/iceberg_features_report.md`.
+
+| Check | Result |
+|---|---|
+| Raw rows (Jan 2025) | 3,475,226 |
+| trips_clean | 3,329,565 |
+| trips_rejected | 145,661 (non_positive_fare 145,515 · dropoff_before_pickup 124 · pickup_outside_month 22) |
+| raw = clean + rejected | yes, diff = 0 |
+| daily_zone_metrics | 7,261 rows, trips and revenue reconcile to trips_clean |
+| Re-run of the load | 0 rows inserted (idempotent MERGE) |
+| Snowflake row counts | match Spark exactly |
+| Unit tests | 41 passed |
 
 ---
 
@@ -276,6 +289,11 @@ spending cloud time.
 - **Timestamp literals built from strings.** `F.lit(datetime)` is converted with the machine's
   local time zone, which shifted month boundaries by 5 hours on an EST laptop; string literals
   cast to `timestamp_ntz` avoid that (covered by a test).
+
+- **JVM stability on Apple Silicon.** On macOS arm64 the Spark driver crashed (SIGSEGV in the JVM) while reading
+  Iceberg tables in parallel. Fixes in `pipeline/spark_session.py`: Eclipse Temurin 17 instead of Homebrew OpenJDK,
+  Iceberg's vectorized Arrow reader turned off, the zstd buffer pool turned off, `local[4]` threads and the C1 JIT only.
+  These trade some speed for stability on a laptop; a Linux cluster or AWS Glue would not need them.
 
 ## Known limitations
 
