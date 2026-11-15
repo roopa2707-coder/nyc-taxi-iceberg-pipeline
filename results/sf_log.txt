@@ -1,0 +1,41 @@
+python -m jobs.snowflake_metadata_paths
+:: loading settings :: url = jar:file:/Users/roopachowdary/Documents/taxi-iceberg-pipeline/.venv/lib/python3.11/site-packages/pyspark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /Users/roopachowdary/.ivy2/cache
+The jars for the packages stored in: /Users/roopachowdary/.ivy2/jars
+org.apache.iceberg#iceberg-spark-runtime-3.5_2.12 added as a dependency
+org.apache.iceberg#iceberg-aws-bundle added as a dependency
+org.apache.hadoop#hadoop-aws added as a dependency
+com.amazonaws#aws-java-sdk-bundle added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-18500405-d164-4a7e-a1c4-1c08deb2dda1;1.0
+	confs: [default]
+	found org.apache.iceberg#iceberg-spark-runtime-3.5_2.12;1.7.1 in central
+	found org.apache.iceberg#iceberg-aws-bundle;1.7.1 in central
+	found org.apache.hadoop#hadoop-aws;3.3.4 in central
+	found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+	found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+:: resolution report :: resolve 217ms :: artifacts dl 5ms
+	:: modules in use:
+	com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+	org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+	org.apache.iceberg#iceberg-aws-bundle;1.7.1 from central in [default]
+	org.apache.iceberg#iceberg-spark-runtime-3.5_2.12;1.7.1 from central in [default]
+	org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   5   |   0   |   0   |   0   ||   5   |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-18500405-d164-4a7e-a1c4-1c08deb2dda1
+	confs: [default]
+	0 artifacts copied, 5 already retrieved (0kB/22ms)
+26/11/15 12:00:02 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/15 12:00:03 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+26/11/15 12:00:07 WARN RESTSessionCatalog: Iceberg REST client is missing the OAuth2 server URI configuration and defaults to http://localhost:8181/api/catalogv1/oauth/tokens. This automatic fallback will be removed in a future Iceberg release.It is recommended to configure the OAuth2 endpoint using the 'oauth2-server-uri' property to be prepared. This warning will disappear if the OAuth2 endpoint is explicitly configured. See https://github.com/apache/iceberg/issues/10537
+trips_clean          taxi/trips_clean/metadata/00004-ea143e2a-5f18-47cb-93b1-23a892cedde6.metadata.json
+daily_zone_metrics   taxi/daily_zone_metrics/metadata/00001-c5404b13-03c4-4ab0-bcf2-30fe7e84a25a.metadata.json
+trips_rejected       taxi/trips_rejected/metadata/00003-adb4a63e-4e82-40aa-9f71-c5e9bb346c4a.metadata.json
+
+Snowflake SQL written to /Users/roopachowdary/Documents/taxi-iceberg-pipeline/snowflake/02_tables_generated.sql

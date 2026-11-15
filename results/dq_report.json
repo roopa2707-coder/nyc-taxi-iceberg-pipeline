@@ -1,0 +1,86 @@
+[
+  {
+    "name": "clean_trip_id_not_null",
+    "passed": true,
+    "observed": "0 rows with NULL in ['trip_id']",
+    "expected": "0",
+    "severity": "error"
+  },
+  {
+    "name": "clean_trip_id_unique",
+    "passed": true,
+    "observed": "0 duplicated trip_id values",
+    "expected": "0",
+    "severity": "error"
+  },
+  {
+    "name": "clean_timestamps_not_null",
+    "passed": true,
+    "observed": "0 rows with NULL in ['pickup_datetime', 'dropoff_datetime']",
+    "expected": "0",
+    "severity": "error"
+  },
+  {
+    "name": "clean_dropoff_not_before_pickup",
+    "passed": true,
+    "observed": "0 rows where dropoff_datetime < pickup_datetime",
+    "expected": "0",
+    "severity": "error"
+  },
+  {
+    "name": "clean_fare_amount_positive",
+    "passed": true,
+    "observed": "0 rows where fare_amount <= 0",
+    "expected": "0",
+    "severity": "error"
+  },
+  {
+    "name": "clean_pickup_date_within_month",
+    "passed": true,
+    "observed": "pickup_date range 2025-01-01..2025-01-31",
+    "expected": "2025-01-01..<2025-02-01",
+    "severity": "error"
+  },
+  {
+    "name": "clean_zone_lookup_coverage",
+    "passed": true,
+    "observed": "0 rows with NULL in ['pickup_zone', 'dropoff_zone']",
+    "expected": "0",
+    "severity": "error"
+  },
+  {
+    "name": "clean_tip_pct_in_range",
+    "passed": false,
+    "observed": "384 rows where tip_pct < 0 OR tip_pct > 500",
+    "expected": "0",
+    "severity": "warn"
+  },
+  {
+    "name": "clean_avg_mph_plausible",
+    "passed": false,
+    "observed": "846 rows where avg_mph > 100",
+    "expected": "0",
+    "severity": "warn"
+  },
+  {
+    "name": "rejected_reason_valid",
+    "passed": true,
+    "observed": "0 rows with missing/unknown reason",
+    "expected": "0",
+    "severity": "error"
+  },
+  {
+    "name": "reconcile_raw_eq_clean_plus_rejected",
+    "passed": true,
+    "observed": "raw=3475226, clean=3329565, rejected=145661, diff=0",
+    "expected": "raw == clean + rejected",
+    "severity": "error"
+  },
+  {
+    "name": "reconcile_metrics_vs_clean",
+    "passed": true,
+    "observed": "clean trips=3329565 revenue=90330278.88; metrics trips=3329565 revenue=90330278.88",
+    "expected": "equal trips and revenue",
+    "severity": "error"
+  }
+]

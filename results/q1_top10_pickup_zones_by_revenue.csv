@@ -1,0 +1,11 @@
+pickup_borough,pickup_zone,trips,total_revenue,revenue_per_trip
+Queens,JFK Airport,137446,11053187.33,80.42
+Queens,LaGuardia Airport,87383,6694009.23,76.61
+Manhattan,Midtown Center,164142,3939367.03,24.00
+Manhattan,Times Sq/Theatre District,120060,3238111.35,26.97
+Manhattan,Upper East Side South,159897,3184415.59,19.92
+Manhattan,Upper East Side North,151745,3087136.30,20.34
+Manhattan,Penn Station/Madison Sq West,115434,2772736.44,24.02
+Manhattan,Midtown East,114448,2706776.29,23.65
+Manhattan,Lincoln Square East,107314,2335879.56,21.77
+Manhattan,Midtown North,92848,2256530.59,24.30

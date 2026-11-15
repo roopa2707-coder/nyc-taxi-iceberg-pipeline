@@ -1,0 +1,6 @@
+payment_type,payment_type_desc,trips,avg_tip_pct,median_tip_pct
+1,Credit card,2444270,26.76,27.04
+0,Flex Fare,455171,2.66,0
+2,Cash,375844,0,0
+4,Dispute,38787,0.04,0
+3,No charge,15493,0.11,0

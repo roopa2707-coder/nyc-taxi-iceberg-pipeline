@@ -1,0 +1,73 @@
+python -m jobs.build_daily_zone_metrics
+:: loading settings :: url = jar:file:/Users/roopachowdary/Documents/taxi-iceberg-pipeline/.venv/lib/python3.11/site-packages/pyspark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /Users/roopachowdary/.ivy2/cache
+The jars for the packages stored in: /Users/roopachowdary/.ivy2/jars
+org.apache.iceberg#iceberg-spark-runtime-3.5_2.12 added as a dependency
+org.apache.iceberg#iceberg-aws-bundle added as a dependency
+org.apache.hadoop#hadoop-aws added as a dependency
+com.amazonaws#aws-java-sdk-bundle added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-d2b9c8ae-081c-4f66-824a-6317922c02c3;1.0
+	confs: [default]
+	found org.apache.iceberg#iceberg-spark-runtime-3.5_2.12;1.7.1 in central
+	found org.apache.iceberg#iceberg-aws-bundle;1.7.1 in central
+	found org.apache.hadoop#hadoop-aws;3.3.4 in central
+	found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+	found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+:: resolution report :: resolve 224ms :: artifacts dl 5ms
+	:: modules in use:
+	com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+	org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+	org.apache.iceberg#iceberg-aws-bundle;1.7.1 from central in [default]
+	org.apache.iceberg#iceberg-spark-runtime-3.5_2.12;1.7.1 from central in [default]
+	org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   5   |   0   |   0   |   0   ||   5   |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-d2b9c8ae-081c-4f66-824a-6317922c02c3
+	confs: [default]
+	0 artifacts copied, 5 already retrieved (0kB/7ms)
+26/11/15 11:56:26 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/11/15 11:56:27 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+26/11/15 11:56:31 WARN RESTSessionCatalog: Iceberg REST client is missing the OAuth2 server URI configuration and defaults to http://localhost:8181/api/catalogv1/oauth/tokens. This automatic fallback will be removed in a future Iceberg release.It is recommended to configure the OAuth2 endpoint using the 'oauth2-server-uri' property to be prepared. This warning will disappear if the OAuth2 endpoint is explicitly configured. See https://github.com/apache/iceberg/issues/10537
+[Stage 0:>                                                         (0 + 4) / 14][Stage 0:>                                                         (0 + 5) / 14][Stage 0:================>                                         (4 + 4) / 14][Stage 0:====================>                                     (5 + 4) / 14][Stage 0:=============================>                            (7 + 4) / 14][Stage 0:=================================>                        (8 + 4) / 14][Stage 0:========================================>                (10 + 4) / 14][Stage 0:============================================>            (11 + 3) / 14][Stage 0:================================================>        (12 + 2) / 14][Stage 0:====================================================>    (13 + 1) / 14][Stage 5:>                                                          (0 + 1) / 1]                                                                                [Stage 9:>                                                          (0 + 4) / 8][Stage 9:=============================>                             (4 + 4) / 8][Stage 9:====================================>                      (5 + 3) / 8][Stage 9:===================================================>       (7 + 1) / 8]                                                                                lake.taxi.daily_zone_metrics: 7,261 rows
++-----------+-----+------+----------+
+|pickup_date|zones| trips|   revenue|
++-----------+-----+------+----------+
+| 2025-01-01|  234| 82387|2375399.31|
+| 2025-01-02|  229| 82045|2423548.31|
+| 2025-01-03|  231| 88569|2494031.49|
+| 2025-01-04|  225| 94861|2545323.34|
+| 2025-01-05|  225| 77231|2277603.18|
+| 2025-01-06|  229| 78106|2255987.04|
+| 2025-01-07|  232| 97626|2633013.27|
+| 2025-01-08|  236|109670|2887853.22|
+| 2025-01-09|  234|114756|3086320.09|
+| 2025-01-10|  239|107524|2930580.69|
+| 2025-01-11|  239|117098|2950991.18|
+| 2025-01-12|  233| 98082|2678219.73|
+| 2025-01-13|  231| 96748|2663500.20|
+| 2025-01-14|  233|117020|3115605.10|
+| 2025-01-15|  232|120896|3229128.26|
+| 2025-01-16|  238|134080|3640234.30|
+| 2025-01-17|  240|115499|3156306.71|
+| 2025-01-18|  237|114106|2832002.97|
+| 2025-01-19|  242|110653|2740959.65|
+| 2025-01-20|  242| 85248|3323697.76|
+| 2025-01-21|  238|112533|3023210.16|
+| 2025-01-22|  236|121204|3160153.23|
+| 2025-01-23|  235|131294|3485498.59|
+| 2025-01-24|  238|123755|3274527.64|
+| 2025-01-25|  233|130451|3216679.49|
+| 2025-01-26|  225| 97907|2658647.45|
+| 2025-01-27|  233| 90047|2495724.84|
+| 2025-01-28|  237|109868|2897134.56|
+| 2025-01-29|  237|115976|3075860.62|
+| 2025-01-30|  234|127604|3450047.63|
+| 2025-01-31|  234|126721|3352488.87|
++-----------+-----+------+----------+
+

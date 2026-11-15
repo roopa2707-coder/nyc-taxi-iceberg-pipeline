@@ -1,0 +1,30 @@
+# Local Apache Polaris (Iceberg REST catalog).
+#   docker compose --env-file ../.env up -d
+# Polaris listens on :8181 (catalog + management API) and :8182 (health).
+#
+# Notes
+# - In-memory persistence: catalog entries are lost when the container stops.
+#   The Iceberg data and metadata stay in S3; see README "Known limitations"
+#   for re-registering tables after a restart.
+# - SKIP_CREDENTIAL_SUBSCOPING_INDIRECTION: Polaris does not vend STS
+#   credentials; the server and Spark both use the least-privilege
+#   taxi-pipeline credentials from .env. Fine for a local setup only.
+services:
+  polaris:
+    image: apache/polaris:latest
+    ports:
+      - "8181:8181"
+      - "8182:8182"
+    environment:
+      POLARIS_BOOTSTRAP_CREDENTIALS: "POLARIS,root,${POLARIS_CLIENT_SECRET:?set POLARIS_CLIENT_SECRET in .env}"
+      polaris.realm-context.realms: POLARIS
+      quarkus.otel.sdk.disabled: "true"
+      polaris.features."SKIP_CREDENTIAL_SUBSCOPING_INDIRECTION": "true"
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:?set AWS_ACCESS_KEY_ID in .env}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:?set AWS_SECRET_ACCESS_KEY in .env}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8182/q/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 20

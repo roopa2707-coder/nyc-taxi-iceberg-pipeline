@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "GlueCatalogFallbackOnlyTaxiDatabase",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetDatabase", "glue:GetDatabases", "glue:CreateDatabase",
+        "glue:GetTable", "glue:GetTables", "glue:CreateTable", "glue:UpdateTable"
+      ],
+      "Resource": [
+        "arn:aws:glue:YOUR_REGION:YOUR_ACCOUNT_ID:catalog",
+        "arn:aws:glue:YOUR_REGION:YOUR_ACCOUNT_ID:database/taxi",
+        "arn:aws:glue:YOUR_REGION:YOUR_ACCOUNT_ID:table/taxi/*"
+      ]
+    }
+  ]
+}
